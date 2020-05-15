@@ -40,19 +40,19 @@ class Grid:
         
     def printer(self):
         self.gravity()
-        print(" R")
+        print("Row:")
         for rowDX in range(len(self.structure)):
             row = self.structure[rowDX]
             if row.count(0) == self.l: continue
-            strr = ' ' + str(self.h-rowDX-1) + '|'
+            strr = '   ' + str(self.h-rowDX-1) + '|'
             for c in row:
                 if c == 0: strr += ' '
                 else: strr += str(c)
                 strr += ' '
             strr += ' '
             print(strr)
-        print('   - - - - - - -  ')
-        print('C: 0 1 2 3 4 5 6  ')
+        print('     - - - - - - -  ')
+        print('Col: 0 1 2 3 4 5 6  ')
         print()
 
     def gravity(self):
@@ -190,7 +190,7 @@ class Grid:
                             depthCount += 1
                             if temp.valid():
                                 if temp.check():
-                                    print("Answer format: (Row,Col),Movement")
+                                    print("Answer format: (Row,Col), Movement eg. D=Down")
                                     print("ANSWER:",moveDict[gridID]+[((origTemp.h-1-i,j),direction)])
                                     print("Depth used:",f'{depthCount:,}')
                                     return
@@ -204,7 +204,6 @@ class Grid:
 import time
 
 r = input('Input number of rows or SerialNum: ')
-##r = '00000000000000000000000000000000000000000000012000002440001212000243300123110'
 if len(r) > 3:
     a = Grid(r)
 else:
