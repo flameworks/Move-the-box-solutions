@@ -1,4 +1,3 @@
-
 class Grid:
     def __init__(self,serial = ''):
         self.l = 7
@@ -41,6 +40,7 @@ class Grid:
         
     def printer(self):
         self.gravity()
+        print(" R")
         for rowDX in range(len(self.structure)):
             row = self.structure[rowDX]
             if row.count(0) == self.l: continue
@@ -52,7 +52,7 @@ class Grid:
             strr += ' '
             print(strr)
         print('   - - - - - - -  ')
-        print('   0 1 2 3 4 5 6  ')
+        print('C: 0 1 2 3 4 5 6  ')
         print()
 
     def gravity(self):
@@ -190,6 +190,7 @@ class Grid:
                             depthCount += 1
                             if temp.valid():
                                 if temp.check():
+                                    print("Answer format: (Row,Col),Movement")
                                     print("ANSWER:",moveDict[gridID]+[((origTemp.h-1-i,j),direction)])
                                     print("Depth used:",f'{depthCount:,}')
                                     return
@@ -197,13 +198,13 @@ class Grid:
                                     moveDict[tempID] = \
                                         moveDict[gridID] + [((origTemp.h-1-i,j),direction)]
             workingGrp = list(moveDict.keys())
-        if len(workingGrp)==0: print("No solution")
+        if not workingGrp: print("No solution")
 
 
 import time
 
 r = input('Input number of rows or SerialNum: ')
-r = '00000000000000000000000000000000000000000000012000002440001212000243300123110'
+##r = '00000000000000000000000000000000000000000000012000002440001212000243300123110'
 if len(r) > 3:
     a = Grid(r)
 else:
@@ -211,7 +212,7 @@ else:
     for i in range(int(r)):
         a.fill(i+1)
 tic = time.perf_counter()
-print("\nORIGINAL:",'\n'+a.getID(),'\n')
+print("\nSerialNum:",'\n'+a.getID(),'\n')
 a.printer()
 a.solve()
 toc = time.perf_counter()
